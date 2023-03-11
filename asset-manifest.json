@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.3515ad4d.css",
-    "main.js": "/static/js/main.59603c65.js",
-    "static/media/Background.jpeg": "/static/media/Background.b25a426713c58f98bde3.jpeg",
-    "static/media/Logo.png": "/static/media/Logo.daf2968162312cd36825.png",
-    "index.html": "/index.html",
-    "main.3515ad4d.css.map": "/static/css/main.3515ad4d.css.map",
-    "main.59603c65.js.map": "/static/js/main.59603c65.js.map"
+    "main.css": "/NetFlix_Clone/signup/static/css/main.3515ad4d.css",
+    "main.js": "/NetFlix_Clone/signup/static/js/main.7bcb9489.js",
+    "static/media/Background.jpeg": "/NetFlix_Clone/signup/static/media/Background.b25a426713c58f98bde3.jpeg",
+    "static/media/Logo.png": "/NetFlix_Clone/signup/static/media/Logo.daf2968162312cd36825.png",
+    "index.html": "/NetFlix_Clone/signup/index.html",
+    "main.3515ad4d.css.map": "/NetFlix_Clone/signup/static/css/main.3515ad4d.css.map",
+    "main.7bcb9489.js.map": "/NetFlix_Clone/signup/static/js/main.7bcb9489.js.map"
   },
   "entrypoints": [
     "static/css/main.3515ad4d.css",
-    "static/js/main.59603c65.js"
+    "static/js/main.7bcb9489.js"
   ]
 }
