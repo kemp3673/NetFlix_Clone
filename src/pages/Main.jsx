@@ -47,14 +47,12 @@ const Main = () => {
   const getGenreMovies = async (genre) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=24414d8fd189b8a9cd3125c1ec11b248&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=${genre}&region=US&adult=false`);
     const data = await response.json();
-    console.log('data: ', genre)
     return data.results;
   }
 
   const getPopularMovies = async () => {
     const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=24414d8fd189b8a9cd3125c1ec11b248&language=en-US&page=1&region=US&adult=false`);
     const data = await response.json();
-    console.log(data);
     setPopular(data.results);
   }
   const getTrendingMovies = async () => {
@@ -108,7 +106,7 @@ const Container = styled.div`
     left: 0;
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
   }
   h1 {
     color: white;
