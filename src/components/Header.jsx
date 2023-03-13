@@ -48,7 +48,6 @@ export default Header;
 
 const Container = styled.div`
   height: 70px;
-  min-width: 768px;
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   color: white;
   display: flex;
@@ -57,13 +56,19 @@ const Container = styled.div`
   letter-spacing: 16px;
   font-size: 14px;
   position: absolute;
-  /* top: -70px; */
   left: 0;
   right: 0;
   top: 0;
   z-index: 3;
+  @media (max-width: 768px) {
+    padding: 0 10px;
+    width: 100vw;
+  }
   img {
     width: 150px;
+    @media (max-width: 768px) {
+      width: 100px;
+    }
   }
   .logInLink {
     button {
@@ -84,6 +89,9 @@ const Container = styled.div`
       transition: all 0.2s ease-in-out;
       &:hover {
         background-color: #8f0007;
+      }
+      @media (max-width: 768px) {
+        font-size: 1rem;
       }
     }
   }

@@ -18,10 +18,9 @@ const Container = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
-  min-height: 100vh;
+
   height: 100%;
   width: 100vw;
-  min-width: 768px;
   background-color: #151515;
   img {
     width: 100%;

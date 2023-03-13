@@ -80,9 +80,7 @@ export default Login;
 
 const Container = styled.div`
   height: 100vh;
-  /* top: 70px; */
   width: 100vw;
-  min-width: 768px;
   position: relative;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
@@ -97,6 +95,17 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     padding: 60px 40px 40px;
+    @media (max-width: 768px) {
+      width: 100vw;
+      height: 100%;
+      padding: 0;
+    }
+  }
+  .body {
+    @media (max-width: 768px) {
+      width: 100vw;
+      height: 100%;
+    }
   }
   .form {
     margin-bottom: 1.5rem;
@@ -105,6 +114,10 @@ const Container = styled.div`
     align-items: center;
     justify-content: start;
     width: 100%;
+    @media (max-width: 768px) {
+      width: 80%;
+      padding: 0 20px;
+    }
 
     input {
       background-color: #333;
@@ -139,6 +152,10 @@ const Container = styled.div`
   .finePrint {
     text-align: left;
     padding: 10px;
+    @media (max-width: 768px) {
+      width: 80%;
+      padding: 0 20px;
+    }
     h4 {
       font-size: 1.125rem;
       font-weight: 400;

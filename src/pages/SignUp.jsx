@@ -91,7 +91,6 @@ const Container = styled.div`
   height: 100vh;
   /* top: 70px; */
   width: 100vw;
-  min-width: 768px;
   position: relative;
   .content {
     position: absolute;
@@ -114,22 +113,37 @@ const Container = styled.div`
       font-weight: 700;
       line-height: 1.1;
       margin-bottom: 0.5rem;
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
     }
     h4 {
       font-size: 1.625rem;
       font-weight: 400;
       line-height: 1.25;
       margin-bottom: 1.5rem;
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
     }
     h6 {
       font-size: 1.125rem;
       font-weight: 400;
       line-height: 1.25;
       margin-bottom: 1.5rem;
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
   }
   .form {
     margin-bottom: 1.5rem;
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
     input {
       background-color: #333;
       color: white;
@@ -141,6 +155,9 @@ const Container = styled.div`
       font-weight: 400;
       line-height: 1.25;
       margin-bottom: 0.5rem;
+      @media (max-width: 475px) {
+        width: 60%;
+      }
       &:focus {
         border: 2px solid white;
       }

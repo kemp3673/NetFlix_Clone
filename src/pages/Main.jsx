@@ -12,13 +12,13 @@ import styled from "styled-components";
 // Math.floor(window.innerWidth / card_width[200]) ... Need to account for padding and margin of cards.
 
 const Main = () => {
-  const [popular, setPopular] = React.useState([]);
-  const [trending, setTrending] = React.useState([]);
-  const [horror, setHorror] = React.useState([]);
-  const [romance, setRomance] = React.useState([]);
-  const [comedy, setComedy] = React.useState([]);
-  const [action, setAction] = React.useState([]);
-  const [family, setFamily] = React.useState([]);
+  const [popular, setPopular] = React.useState(null);
+  const [trending, setTrending] = React.useState(null);
+  const [horror, setHorror] = React.useState(null);
+  const [romance, setRomance] = React.useState(null);
+  const [comedy, setComedy] = React.useState(null);
+  const [action, setAction] = React.useState(null);
+  const [family, setFamily] = React.useState(null);
 
   // Simplify genre fetches into one function that takes in genre id as parameter and returns array of movies for that genre.
   // find way to minimize number of fetches to API.
@@ -81,13 +81,13 @@ const Main = () => {
       <Background />
       <Header login={false} user={true}/>
       <Wrapper className="body flex column a-center j-center">
-      <Category title="Trending" movies={trending} />
-      <Category title="Popular" movies={popular} />
-      <Category title="Romance" movies={romance} />
-      <Category title="Comedy" movies={comedy} />
-      <Category title="Action" movies={action} />
-      <Category title="Family" movies={family} />
-      <Category title="Horror" movies={horror} />
+      {trending && <Category title="Trending" movies={trending} />}
+      {popular && <Category title="Popular" movies={popular} />}
+      {romance && <Category title="Romance" movies={romance} />}
+      {comedy && <Category title="Comedy" movies={comedy} />}
+      {action && <Category title="Action" movies={action} />}
+      {family && <Category title="Family" movies={family} />}
+      {horror && <Category title="Horror" movies={horror} />}
       </Wrapper>
     </Container>
   );
@@ -96,7 +96,7 @@ const Main = () => {
 export default Main;
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100vw;
   min-width: 768px;
   position: relative;
@@ -127,3 +127,5 @@ const Wrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
 `;
+
+

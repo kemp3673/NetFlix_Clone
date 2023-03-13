@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const CardMaker = (data) => {
   const [clicked, setClicked] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   const posterImg = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
   const backdropImg = `https://image.tmdb.org/t/p/w500/${data.backdrop_path}`;
@@ -18,11 +17,14 @@ const CardMaker = (data) => {
     <Card
       className="card"
       onClick={(e) => setClicked(true)}
-      onMouseEnter={(e) => setHovered(true)}
-      onMouseLeave={(e) => setHovered(false)}
     >
       {clicked && <Navigate to={`/player/movie=${data.urlID}`} />}
-      <DefaultImg src={posterImg} className="posterImg" alt={data.title} />
+      <DefaultImg
+        src={posterImg}
+        className="posterImg"
+        alt={data.title}
+        key={data.id}
+      />
       <BackDropWrapper className="backdropWrapper">
         <BackdropImg
           src={backdropImg}
@@ -44,7 +46,7 @@ const Card = styled.div`
   cursor: pointer;
   width: 200px;
   height: 300px;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   &:hover {
     width: 500px;
     .backdropImg {
@@ -67,17 +69,17 @@ const DefaultImg = styled.img`
   cursor: pointer;
   width: 200px;
   height: 300px;
-  transition: opacity 1s ease-in-out;
-  transition: width 1s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  transition: width 0.5s ease-in-out;
 `;
 
 const BackdropImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 500px;
   height: 300px;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
 `;
 
 const BackDropWrapper = styled.div`
