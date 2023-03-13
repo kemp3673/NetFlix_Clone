@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/NetFlix_Clone/static/css/main.3515ad4d.css",
-    "main.js": "/NetFlix_Clone/static/js/main.275cba07.js",
-    "static/js/902.a02aa28d.chunk.js": "/NetFlix_Clone/static/js/902.a02aa28d.chunk.js",
+    "main.js": "/NetFlix_Clone/static/js/main.f7e90c73.js",
+    "static/js/902.f213d033.chunk.js": "/NetFlix_Clone/static/js/902.f213d033.chunk.js",
     "static/js/617.5387b8be.chunk.js": "/NetFlix_Clone/static/js/617.5387b8be.chunk.js",
     "static/media/Background.jpeg": "/NetFlix_Clone/static/media/Background.b25a426713c58f98bde3.jpeg",
     "static/media/Logo.png": "/NetFlix_Clone/static/media/Logo.daf2968162312cd36825.png",
     "index.html": "/NetFlix_Clone/index.html",
     "main.3515ad4d.css.map": "/NetFlix_Clone/static/css/main.3515ad4d.css.map",
-    "main.275cba07.js.map": "/NetFlix_Clone/static/js/main.275cba07.js.map",
-    "902.a02aa28d.chunk.js.map": "/NetFlix_Clone/static/js/902.a02aa28d.chunk.js.map",
+    "main.f7e90c73.js.map": "/NetFlix_Clone/static/js/main.f7e90c73.js.map",
+    "902.f213d033.chunk.js.map": "/NetFlix_Clone/static/js/902.f213d033.chunk.js.map",
     "617.5387b8be.chunk.js.map": "/NetFlix_Clone/static/js/617.5387b8be.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3515ad4d.css",
-    "static/js/main.275cba07.js"
+    "static/js/main.f7e90c73.js"
   ]
 }
