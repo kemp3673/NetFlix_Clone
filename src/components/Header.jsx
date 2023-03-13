@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate, Navigate } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
 import ProfileImg from "../assets/ProfileImg.png";
 
-const Header = ({login, user}) => {
+const Header = ({ login, user, player }) => {
+  const [clicked, setClicked] = useState(false);
+  const [returnHome, setReturnHome] = useState(false);
+  const navigate = useNavigate();
+  const handleProfileImgClick = () => {
+    navigate("/signup");
+  };
+
+
   return (
     <Container>
-      <Wrapper>
-        <img src={Logo} alt="Logo" />
+      {clicked && <Navigate to="/login" />}
+      {returnHome && <Navigate to="/" />}
+      <Wrapper className="headerWrapper">
+        {player ?
+          <ReturnArrow
+          onClick={() => setReturnHome(true)}
+          />
+          :
+          <img src={Logo} alt="Logo"
+        />}
         <div className="logInLink">
-          {login && <a href="/login">Log In</a>}
+          {login && <button onClick={() => setClicked(true)}>Log In</button>}
         </div>
-        {user && <div className="profileImg"><img src={ProfileImg} alt="User" /></div>}
+        {user && (
+          <div className="profileImg">
+            <img
+              src={ProfileImg}
+              alt="User"
+              onClick={(e) => handleProfileImgClick()}
+            />
+          </div>
+        )}
       </Wrapper>
     </Container>
   );
@@ -22,7 +48,8 @@ export default Header;
 
 const Container = styled.div`
   height: 70px;
-  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.75));
+  min-width: 768px;
+  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   color: white;
   display: flex;
   align-items: center;
@@ -30,23 +57,31 @@ const Container = styled.div`
   letter-spacing: 16px;
   font-size: 14px;
   position: absolute;
-  top: -70px;
+  /* top: -70px; */
   left: 0;
   right: 0;
+  top: 0;
   z-index: 3;
   img {
     width: 150px;
   }
   .logInLink {
-    a {
-      letter-spacing: 1.42px;
-      text-decoration: none;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e50914;
+      width: fit-content;
+      height: 30px;
       color: white;
-      background-color: red;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 3px;
-      transition: all 0.2s ease 0s;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.1875rem;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 1.25;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
       &:hover {
         background-color: #8f0007;
       }
@@ -76,7 +111,17 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width:   75%;
+  width: 95%;
   margin: 0 auto;
 `;
 
+const ReturnArrow = styled(FaArrowLeft)`
+  font-size: 36px;
+  cursor: pointer;
+  color: #414141;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: #8a8a8a;
+    font-size: 40px;
+  }
+`;

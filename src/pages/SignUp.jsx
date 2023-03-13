@@ -6,14 +6,16 @@ import styled from "styled-components";
 import { Navigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [validated, setValidated] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    if (email && password) {
+    if (formValues.email && formValues.password) {
       setValidated(true);
     }
   };
@@ -23,11 +25,10 @@ const SignUp = () => {
     setShowPassword(true);
   };
 
-
   return (
     <Container>
-      <Background showBackgroundImg={true}/>
-      <Header login={true}/>
+      <Background showBackgroundImg={true} />
+      <Header login={true} />
       {validated && <Navigate to="/" />}
       <div className="body flex column a-center j-center">
         <div className="content">
@@ -41,9 +42,41 @@ const SignUp = () => {
           </div>
           <div className="form">
             <form>
-              <input type="email" placeholder="Email address" name="email" onChange={e => setEmail(e.target.value)}/>
-              {showPassword && <input type="password" placeholder="Password" name="password" onChange={e => setPassword(e.target.value)}/>}
-              {showPassword ? <Button onClick={e => handleLogin(e)}>Create Account</Button> : <Button onClick={e => handleShowPassword(e)}>Get Started</Button>}
+              {showPassword && (
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  name="email"
+                  value={formValues.email}
+                  onChange={(e) =>
+                    setFormValues({
+                      ...formValues,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                />
+              )}
+              {showPassword && (
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={formValues.password}
+                  onChange={(e) =>
+                    setFormValues({
+                      ...formValues,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                />
+              )}
+              {showPassword ? (
+                <Button onClick={(e) => handleLogin(e)}>Create Account</Button>
+              ) : (
+                <Button onClick={(e) => handleShowPassword(e)}>
+                  Get Started
+                </Button>
+              )}
             </form>
           </div>
         </div>
@@ -55,8 +88,8 @@ const SignUp = () => {
 export default SignUp;
 
 const Container = styled.div`
-  height: calc(100vh - 70px);
-  top: 70px;
+  height: 100vh;
+  /* top: 70px; */
   width: 100vw;
   min-width: 768px;
   position: relative;
@@ -101,7 +134,7 @@ const Container = styled.div`
       background-color: #333;
       color: white;
       border: none;
-      margin-left: 1.5rem;
+      margin-right: 0.5rem;
       padding: 0.5rem 1rem;
       border-radius: 0.1875rem;
       font-size: 1.125rem;
@@ -113,7 +146,6 @@ const Container = styled.div`
       }
     }
   }
-
 `;
 
 const Button = styled.button`
@@ -126,6 +158,7 @@ const Button = styled.button`
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.25;
+  margin-bottom: 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {

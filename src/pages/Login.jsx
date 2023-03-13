@@ -6,40 +6,69 @@ import styled from "styled-components";
 import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
   const [validated, setValidated] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    if (email && password) {
+    if (formValues.email && formValues.password) {
       setValidated(true);
     }
   };
 
   return (
     <Container>
-      <Background showBackgroundImg={true}/>
+      <Background showBackgroundImg={true} />
       <Header />
+      {signUp && <Navigate to="/signup" />}
       {validated && <Navigate to="/" />}
       <div className="body flex column a-center j-center">
         <div className="content">
           <div className="form">
             <form>
               <h1>Sign In</h1>
-              <input type="email" placeholder="Email address" name="email" onChange={e => setEmail(e.target.value)}/>
-              <input type="password" placeholder="Password" name="password" onChange={e => setPassword(e.target.value)}/>
+              <input
+                type="email"
+                placeholder="Email address"
+                name="email"
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
               <div className="remember">
-              <input type="checkbox" name="remember"/>
-              <label for="remember">Remember me</label>
+                <input type="checkbox" id="remember" name="remember" />
+                <label htmlFor="remember">Remember me</label>
               </div>
 
-              <Button onClick={e => handleLogin(e)}>Sign In</Button>
+              <Button onClick={(e) => handleLogin(e)}>Sign In</Button>
             </form>
           </div>
           <div className="finePrint">
-            <h4>New to Netflix? <SignInLink href="/signup">Sign up now.</SignInLink></h4>
-            <h6>This page is not protected by Google reCAPTCHA to ensure you're not a bot.</h6>
+            <h4>
+              New to Notflix?{" "}
+              <SignInLink onClick={() => setSignUp(true)}>Sign up now.</SignInLink>
+            </h4>
+            <h6>
+              This page is not protected by Google reCAPTCHA. This website is a personal project to clone Netflix. It is not affiliated with Netflix in any way.
+            </h6>
           </div>
         </div>
       </div>
@@ -49,10 +78,9 @@ const Login = () => {
 
 export default Login;
 
-
 const Container = styled.div`
-  height: calc(100vh - 70px);
-  top: 70px;
+  height: 100vh;
+  /* top: 70px; */
   width: 100vw;
   min-width: 768px;
   position: relative;
@@ -104,7 +132,7 @@ const Container = styled.div`
       font-size: 2.125rem;
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       color: white;
     }
   }
@@ -151,8 +179,12 @@ const Button = styled.button`
   }
 `;
 
-const SignInLink = styled.a`
+const SignInLink = styled.button`
   color: #e50914;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.125rem;
   text-decoration: none;
   &:hover {
     text-decoration: underline;

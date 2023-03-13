@@ -22,7 +22,7 @@ const Container = styled.div`
   height: 100%;
   width: 100vw;
   min-width: 768px;
-  background-color: #1a1a1a;
+  background-color: #151515;
   img {
     width: 100%;
     height: 100%;

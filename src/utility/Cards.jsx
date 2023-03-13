@@ -1,13 +1,127 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+import styled from "styled-components";
 
-const cardMaker = (data) => {
-  console.log("data");
-  console.log(data);
+const CardMaker = (data) => {
+  const [clicked, setClicked] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const posterImg = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+  const backdropImg = `https://image.tmdb.org/t/p/w500/${data.backdrop_path}`;
+
+  let summary = data.overview;
+  if (summary.length > 430) {
+    summary = summary.substring(0, 430) + "...";
+  }
+
   return (
-    <div className="card">
-      <img src={data.image} alt={data.title} />
-    </div>
+    <Card
+      className="card"
+      onClick={(e) => setClicked(true)}
+      onMouseEnter={(e) => setHovered(true)}
+      onMouseLeave={(e) => setHovered(false)}
+    >
+      {clicked && <Navigate to={`/player/movie=${data.urlID}`} />}
+      <DefaultImg src={posterImg} className="posterImg" alt={data.title} />
+      <BackDropWrapper className="backdropWrapper">
+        <BackdropImg
+          src={backdropImg}
+          alt={data.title}
+          className="backdropImg"
+        />
+        <span>{data.title}</span>
+        <p>{summary}</p>
+      </BackDropWrapper>
+    </Card>
   );
-}
+};
 
-export default cardMaker;
+export default CardMaker;
+
+const Card = styled.div`
+  position: relative;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  width: 200px;
+  height: 300px;
+  transition: all 1s ease-in-out;
+  &:hover {
+    width: 500px;
+    .backdropImg {
+      width: 500px;
+      opacity: 1;
+    }
+    .posterImg {
+      opacity: 0;
+      width: 500px;
+    }
+    .backdropWrapper {
+      opacity: 1;
+      width: 500px;
+    }
+  }
+`;
+
+const DefaultImg = styled.img`
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+  height: 300px;
+  transition: opacity 1s ease-in-out;
+  transition: width 1s ease-in-out;
+`;
+
+const BackdropImg = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 300px;
+  transition: all 1s ease-in-out;
+`;
+
+const BackDropWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: hidden;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(500px - 2rem);
+    height: 50px;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-weight: 900;
+    display: flex;
+    padding: 0 1rem;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+  p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(500px - 2rem);
+    min-height: 100px;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    font-weight: 400;
+    display: flex;
+    text-align: justify;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+`;
