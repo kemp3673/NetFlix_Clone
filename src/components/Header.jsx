@@ -16,7 +16,7 @@ const Header = ({ login, user, player }) => {
 
 
   return (
-    <Container>
+    <Container className="HeaderContainer">
       {clicked && <Navigate to="/login" />}
       {returnHome && <Navigate to="/" />}
       <Wrapper className="headerWrapper">
@@ -62,12 +62,12 @@ const Container = styled.div`
   z-index: 3;
   @media (max-width: 768px) {
     padding: 0 10px;
-    width: 100vw;
+    height: 30px;
   }
   img {
     width: 150px;
     @media (max-width: 768px) {
-      width: 100px;
+      width: 75px;
     }
   }
   .logInLink {
@@ -77,7 +77,7 @@ const Container = styled.div`
       align-items: center;
       background-color: #e50914;
       width: fit-content;
-      height: 30px;
+      /* height: 30px; */
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -91,7 +91,9 @@ const Container = styled.div`
         background-color: #8f0007;
       }
       @media (max-width: 768px) {
-        font-size: 1rem;
+        font-size: 0.75rem;
+        /* height: 30px; */
+        padding: 0.2rem .5rem;
       }
     }
   }
@@ -112,6 +114,10 @@ const Container = styled.div`
       width: 45px;
       height: 45px;
     }
+    @media (max-width: 768px) {
+      width: 25px;
+      height: 25px;
+      }
   }
 `;
 
@@ -131,5 +137,8 @@ const ReturnArrow = styled(FaArrowLeft)`
   &:hover {
     color: #8a8a8a;
     font-size: 40px;
+  }
+  @media (max-width: 768px) {
+        font-size: 24px;
   }
 `;

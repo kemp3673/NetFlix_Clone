@@ -2,15 +2,11 @@ import React, { useEffect } from "react";
 
 import Header from "../components/Header";
 import Background from "../components/Background";
-// import CardMaker from "../utility/Cards";
 import Category from "../components/Category";
 import { freeMovies } from "../assets/freeMovies";
 
 import styled from "styled-components";
 
-// To have the row array move over to next not fully visible card, instead of simply incrementing by ++, take screen size and divide by card width, round down, and this will give how many cards are in the viewport. Increment array counter by this number to get next starting index to make row navigation more modern.
-
-// Math.floor(window.innerWidth / card_width[200]) ... Need to account for padding and margin of cards.
 
 const Main = () => {
   const [popular, setPopular] = React.useState(null);
@@ -97,9 +93,8 @@ const Main = () => {
 export default Main;
 
 const Container = styled.div`
-  height: calc(100vh - 70px);
+  height: 100vh;
   width: 100vw;
-  min-width: 768px;
   position: relative;
   .body {
     background-color: rgba(0, 0, 0, 0);
@@ -109,7 +104,6 @@ const Container = styled.div`
     left: 0;
     display: flex;
     flex-direction: column;
-    /* padding-left: 1rem; */
   }
   h1 {
     color: white;
@@ -117,6 +111,9 @@ const Container = styled.div`
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 0.5rem;
+    @media (max-width: 768px) {
+        font-size: 1.75rem;
+    }
   }
 `;
 
@@ -127,6 +124,9 @@ const Wrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  @media (max-width: 768px) {
+        top: 30px;
+    }
 `;
 
 

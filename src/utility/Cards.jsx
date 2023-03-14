@@ -89,6 +89,10 @@ const Card = styled.div`
       width: 500px;
     }
   }
+  @media (max-width: 768px) {
+      width: 150px;
+      height: 210px;
+    }
 `;
 
 const DefaultImg = styled.img`
@@ -98,6 +102,10 @@ const DefaultImg = styled.img`
   height: 300px;
   transition: opacity 0.5s ease-in-out;
   transition: width 0.5s ease-in-out;
+  @media (max-width: 768px) {
+      width: 150px;
+      height: 210px;
+    }
 `;
 
 const BackdropImg = styled.img`

@@ -9,6 +9,7 @@ const Category = ({ title, movies }) => {
   const rowRef = useRef(null);
   const screenWidth = window.innerWidth;
 
+
   const handleScroll = (direction) => {
     // Reference to row of cards
     const row = rowRef.current;
@@ -36,6 +37,46 @@ const Category = ({ title, movies }) => {
     }
   };
 
+  const handleSwipeStart = (e) => {
+    // Save initial touch position
+    console.log(e.touches[0].clientX);
+    const touchX = e.touches[0].clientX;
+    setSlideValue(touchX);
+  };
+
+  const handleSwipeEnd = (e) => {
+    console.log(e.changedTouches[0].clientX);
+    // Calculate distance of swipe
+    const touchX = e.changedTouches[0].clientX;
+    const swipeDistance = slideValue - touchX;
+
+    // Reference to row of cards
+    const row = rowRef.current;
+    // Width of row of cards
+    let rowWidth = row.getBoundingClientRect().width;
+
+    if (swipeDistance > 0 && slideValue > 0) {
+      // If remaining cards are greater than screen width, scroll by screen width
+      if ((rowWidth - slideValue) > swipeDistance) {
+        // Set slide value to current slide value minus screen width
+        setSlideValue(slideValue + swipeDistance);
+      } else {
+        // If remaining cards are less than screen width, scroll by remaining cards
+        setSlideValue(0);
+      }
+    } else if (swipeDistance < 0 && slideValue <= (rowWidth-screenWidth)) {
+      // If remaining cards are greater than screen width, scroll by screen width
+      if ((slideValue + screenWidth) < (rowWidth - screenWidth)) {
+        setSlideValue((slideValue + screenWidth) - 164);
+      } else {
+        // If remaining cards are less than screen width, scroll by remaining cards
+        // 124px is width of right arrow (60px) + 4rem padding-left (64px)
+        setSlideValue(rowWidth - (screenWidth - 124));
+      }
+    }
+  };
+
+
   useEffect(() => {
     const row = rowRef.current;
     row.style.transform = `translateX(-${slideValue}px)`;
@@ -46,6 +87,8 @@ const Category = ({ title, movies }) => {
     className="category"
     onMouseEnter={() => setShowSlider(true)}
     onMouseLeave={() => setShowSlider(false)}
+    // onTouchStart={handleSwipeStart}
+    // onTouchEnd={handleSwipeEnd}
     >
       {showSlider && (
         <LeftArrow className="leftArrow" onClick={() => handleScroll('left')}>
@@ -83,6 +126,10 @@ const Wrapper = styled.div`
     transition: transform 1s ease-in-out;
     transform: translateX(0px);
   }
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+    padding-left: 2rem;
+    }
 `;
 
 const LeftArrow = styled.button`
@@ -105,6 +152,12 @@ const LeftArrow = styled.button`
     background-color: rgba(0, 0, 0, 0.9);
     color: #8f8f8f;
   }
+  @media (max-width: 768px) {
+    height: 210px;
+    width: 30px;
+    top: 58px;
+    font-size: 2rem;
+    }
 `;
 
 const RightArrow = styled.button`
@@ -127,4 +180,10 @@ const RightArrow = styled.button`
     background-color: rgba(0, 0, 0, 0.9);
     color: #8f8f8f;
   }
+  @media (max-width: 768px) {
+    height: 210px;
+    width: 30px;
+    top: 58px;
+    font-size: 2rem;
+    }
 `;

@@ -181,4 +181,8 @@ const Button = styled.button`
   &:hover {
     background-color: #8f0007;
   }
+  @media (max-width: 768px) {
+        font-size: 1rem;
+        padding: 0.2rem .5rem;
+  }
 `;

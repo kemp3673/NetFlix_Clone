@@ -23,7 +23,6 @@ const Container = styled.div`
   height: 100vh;
   background-color: black;
   width: 100vw;
-  min-width: 768px;
   position: relative;
   overflow-y: clip;
   .player {
@@ -44,9 +43,13 @@ const PlayerWrapper = styled.div`
   top: 70px;
   left: 0;
   width: 100%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 70px);
   iframe {
     width: 100%;
     height: 100%;
   }
+  @media (max-width: 768px) {
+      top: 30px;
+      height: calc(100vh - 30px);
+    }
 `;

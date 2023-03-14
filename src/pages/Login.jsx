@@ -86,6 +86,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: clip;
   .content {
     background-color: rgba(0, 0, 0, 0.75);
     width: 300px;
@@ -99,6 +100,10 @@ const Container = styled.div`
       width: 100vw;
       height: 100%;
       padding: 0;
+    }
+    @media (max-height: 500px) {
+      width: 100vw;
+      height: 100vh;
     }
   }
   .body {
@@ -133,6 +138,9 @@ const Container = styled.div`
       &:focus {
         border: 2px solid white;
       }
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
     label {
       color: #707070;
@@ -147,6 +155,9 @@ const Container = styled.div`
       line-height: 1.1;
       margin-bottom: 1rem;
       color: white;
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
     }
   }
   .finePrint {
@@ -162,6 +173,9 @@ const Container = styled.div`
       line-height: 1.25;
       margin-bottom: 1.5rem;
       color: #737373;
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
     }
     h6 {
       font-size: 0.75rem;
@@ -169,6 +183,9 @@ const Container = styled.div`
       line-height: 1.25;
       margin-bottom: 1.5rem;
       color: #737373;
+      @media (max-width: 768px) {
+        font-size: 0.5rem;
+      }
     }
   }
   .remember {
@@ -184,7 +201,7 @@ const Button = styled.button`
   width: fit-content;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem .5rem;
   border-radius: 0.1875rem;
   font-size: 1.125rem;
   font-weight: 400;
@@ -194,6 +211,9 @@ const Button = styled.button`
   &:hover {
     background-color: #8f0007;
   }
+  @media (max-width: 768px) {
+        font-size: 1rem;
+      }
 `;
 
 const SignInLink = styled.button`
@@ -206,4 +226,7 @@ const SignInLink = styled.button`
   &:hover {
     text-decoration: underline;
   }
+  @media (max-width: 768px) {
+        font-size: 1rem;
+      }
 `;
