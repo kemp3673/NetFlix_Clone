@@ -37,45 +37,6 @@ const Category = ({ title, movies }) => {
     }
   };
 
-  const handleSwipeStart = (e) => {
-    // Save initial touch position
-    console.log(e.touches[0].clientX);
-    const touchX = e.touches[0].clientX;
-    setSlideValue(touchX);
-  };
-
-  const handleSwipeEnd = (e) => {
-    console.log(e.changedTouches[0].clientX);
-    // Calculate distance of swipe
-    const touchX = e.changedTouches[0].clientX;
-    const swipeDistance = slideValue - touchX;
-
-    // Reference to row of cards
-    const row = rowRef.current;
-    // Width of row of cards
-    let rowWidth = row.getBoundingClientRect().width;
-
-    if (swipeDistance > 0 && slideValue > 0) {
-      // If remaining cards are greater than screen width, scroll by screen width
-      if ((rowWidth - slideValue) > swipeDistance) {
-        // Set slide value to current slide value minus screen width
-        setSlideValue(slideValue + swipeDistance);
-      } else {
-        // If remaining cards are less than screen width, scroll by remaining cards
-        setSlideValue(0);
-      }
-    } else if (swipeDistance < 0 && slideValue <= (rowWidth-screenWidth)) {
-      // If remaining cards are greater than screen width, scroll by screen width
-      if ((slideValue + screenWidth) < (rowWidth - screenWidth)) {
-        setSlideValue((slideValue + screenWidth) - 164);
-      } else {
-        // If remaining cards are less than screen width, scroll by remaining cards
-        // 124px is width of right arrow (60px) + 4rem padding-left (64px)
-        setSlideValue(rowWidth - (screenWidth - 124));
-      }
-    }
-  };
-
 
   useEffect(() => {
     const row = rowRef.current;
@@ -87,8 +48,6 @@ const Category = ({ title, movies }) => {
     className="category"
     onMouseEnter={() => setShowSlider(true)}
     onMouseLeave={() => setShowSlider(false)}
-    // onTouchStart={handleSwipeStart}
-    // onTouchEnd={handleSwipeEnd}
     >
       {showSlider && (
         <LeftArrow className="leftArrow" onClick={() => handleScroll('left')}>
@@ -118,13 +77,21 @@ const Wrapper = styled.div`
   margin-bottom: 2rem;
   padding-left: 4rem;
   height: 350px;
-  /* overflow-x: scroll; */
   .row {
     display: flex;
     flex-wrap: nowrap;
     width: fit-content;
     transition: transform 1s ease-in-out;
     transform: translateX(0px);
+    @media (max-width: 768px) {
+    width: 100%;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    }
+  }
+  .row::-webkit-scrollbar {
+  display: none;
   }
   @media (max-width: 768px) {
     margin-bottom: 0;
