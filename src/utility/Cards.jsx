@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import styled from "styled-components";
 
+import youtubeAPI from "../api/youtube.js";
+
 const CardMaker = (data) => {
   const [clicked, setClicked] = useState(false);
-
+  const [url, setUrl] = useState("");
   const posterImg = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
   const backdropImg = `https://image.tmdb.org/t/p/w500/${data.backdrop_path}`;
 
@@ -13,12 +15,37 @@ const CardMaker = (data) => {
     summary = summary.substring(0, 430) + "...";
   }
 
+  const getVideoFile = async () => {
+    const response = await youtubeAPI.get("/search", {
+      params: {
+        q: `${data.title} trailer`,
+        },
+    }).then((response) => {
+      setUrl(response.data.items[0].id.videoId);
+    }).catch((error) => {
+      console.log('error', error);
+    });
+  };
+
+  const handleClick = () => {
+    // Check if youtube url is already present from stored data
+    if (!data.urlID) {
+        //Make call to youtube api
+      getVideoFile().then(() => {
+        setClicked(true);
+      });
+    } else {
+    setUrl(data.urlID);
+    setClicked(true)
+    }
+  };
+
   return (
     <Card
       className="card"
-      onClick={(e) => setClicked(true)}
+      onClick={() => handleClick()}
     >
-      {clicked && <Navigate to={`/player/movie=${data.urlID}`} />}
+      {clicked && <Navigate to={`/player/movie=${url}`} />}
       <DefaultImg
         src={posterImg}
         className="posterImg"

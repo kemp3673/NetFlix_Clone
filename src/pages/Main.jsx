@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Background from "../components/Background";
 // import CardMaker from "../utility/Cards";
 import Category from "../components/Category";
+import { freeMovies } from "../assets/freeMovies";
 
 import styled from "styled-components";
 
@@ -44,6 +45,7 @@ const Main = () => {
     Western: 37
   };
 
+  // TODO move fetches to API file and convert to axios
   const getGenreMovies = async (genre) => {
     const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=24414d8fd189b8a9cd3125c1ec11b248&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=${genre}&region=US&adult=false`);
     const data = await response.json();
@@ -79,13 +81,14 @@ const Main = () => {
       <Background />
       <Header login={false} user={true}/>
       <Wrapper className="body flex column a-center j-center">
-      {trending && <Category title="Trending" movies={trending} />}
-      {popular && <Category title="Popular" movies={popular} />}
-      {romance && <Category title="Romance" movies={romance} />}
-      {comedy && <Category title="Comedy" movies={comedy} />}
-      {action && <Category title="Action" movies={action} />}
-      {family && <Category title="Family" movies={family} />}
-      {horror && <Category title="Horror" movies={horror} />}
+      <Category title="Free Movies" movies={freeMovies} />
+      {trending && <Category title="Trending Trailers" movies={trending} />}
+      {popular && <Category title="Popular Trailers" movies={popular} />}
+      {romance && <Category title="Romance Trailers" movies={romance} />}
+      {comedy && <Category title="Comedy Trailers" movies={comedy} />}
+      {action && <Category title="Action Trailers" movies={action} />}
+      {family && <Category title="Family Trailers" movies={family} />}
+      {horror && <Category title="Horror Trailers" movies={horror} />}
       </Wrapper>
     </Container>
   );

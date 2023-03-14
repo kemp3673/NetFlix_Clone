@@ -7,7 +7,6 @@ const Category = ({ title, movies }) => {
   const [showSlider, setShowSlider] = useState(false);
   const [slideValue, setSlideValue] = useState(0);
   const rowRef = useRef(null);
-
   const screenWidth = window.innerWidth;
 
   const handleScroll = (direction) => {
