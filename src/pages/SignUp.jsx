@@ -77,8 +77,8 @@ const SignUp = ({setIsLoggedIn}) => {
       <div className="body flex column a-center j-center">
         <div className="content">
           <div className="text flex column">
-            <h1>Unlimited movies, TV shows, and more.</h1>
-            <h4>Or at least we used to.</h4>
+            <h1>Clone application for practice</h1>
+            <h4>Not affiliated with Netflix</h4>
             {!error ? (
               <h6>
                 Don't have an account? Enter your email to create or restart

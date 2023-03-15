@@ -16,7 +16,6 @@ const CardMaker = (data) => {
   }
 
   const getVideoFile = async () => {
-    console.log('data', data);
     const response = await youtubeAPI.get("/search", {
       params: {
         q: `${data.title} trailer`,
@@ -24,7 +23,7 @@ const CardMaker = (data) => {
     }).then((response) => {
       setUrl(response.data.items[0].id.videoId);
     }).catch((error) => {
-      setUrl('error');
+      setUrl('l73rmrLTHQc'); // Default video if not found or API error
     });
   };
 

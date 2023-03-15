@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import Header from "../components/Header";
 
 const Player = ({urlID}) => {
   let videoCode = window.location.href.split("=")[1];
+
+  useEffect (() => {
+    if (videoCode === 'l73rmrLTHQc') {
+      console.error('There was a problem retrieving the video.');
+    alert('Sorry, there was a problem retrieving the video. Please try again later. In the meantime, enjoy this video of baby pandas!');
+    }
+  }, [videoCode]);
+
   return (
     <Container>
       <Header player={true}/>
-
       <PlayerWrapper>
-        <iframe src={`https://www.youtube.com/embed/${videoCode}?autoplay=1&modestbranding=1&rel=0&showinfo=0&controls=1`} title="embedded player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen"></iframe>
+        <iframe src={`https://www.youtube.com/embed/${videoCode}?autoplay=1&modestbranding=1&rel=0&showinfo=0&controls=1`} title="embedded player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen"></iframe>
     </PlayerWrapper>
     </Container>
   );

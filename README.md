@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# NotFlix: A Netflix Clone to practice user authentication and UI creation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
@@ -11,60 +11,20 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Application Overview
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. When user first visits site, they are presented with a sign-up page. If they already have an account they can click "Log In" to be redirected to the login page. Additionally, if they are already logged in, they will be redirected to the main component instead of the sign-up page. Account creation and login are handled with Firebase authentication.
 
-### `npm run eject`
+1. The login page has a link to return to the sign-up page if user does not have an account. Additionally, the page has a link to redirect the user to a password reset component if they have forgotten their password. This utilizes Firebase's password reset function.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. The password reset component has a link to return to the login page in the event the user remembers their password. Otherwise, the user should enter their email to receive a password reset email from Firebase.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Once a user is authenticated and logged in, the application stores a localstorage token to keep the user logged in. In order to log out, the user can click the log out icon in the top right corner. This removes the token from local storage and redirects the user to the sign-up page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. The main component utilizes TMDb API to retrieve a list of movies for each category. When the user hovers over a row, left and right navigation arrows will appear which will allow the user to scroll through the list at a rate of the width of the screen. Hovering over an image will display a background overlay that includes the movie title and summary of the movie. Clicking on the image will redirect the user to the movie player component. The main component also includes a list of free to watch movies selected from Youtube and stored in a static file.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. The player component utilizes the Youtube API to play the selected movie trailer. In order to return to the main component, the user simply clicks the back arrow located in the top left corner.
