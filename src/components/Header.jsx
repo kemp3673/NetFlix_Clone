@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import styled from "styled-components";
 import { FaArrowLeft } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
-import ProfileImg from "../assets/ProfileImg.png";
 
 const Header = ({ login, user, player }) => {
   const [clicked, setClicked] = useState(false);
@@ -14,7 +13,7 @@ const Header = ({ login, user, player }) => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    Cookies.remove("NotFlix-loggedIn");
+    localStorage.removeItem('loggedIn');
     navigate("/signup");
   }
 

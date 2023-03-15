@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Cookies from "js-cookie";
 import { HashRouter, BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import SignUp from "./pages/SignUp";
@@ -9,10 +8,9 @@ import Player from "./pages/Player";
 import PasswordReset from "./pages/PasswordReset";
 
 const App = () => {
-  // Check if the 'loggedIn' cookie is set
-  console.log('Cookies: ', Cookies.get('NotFlix-loggedIn'));
-  const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get('NotFlix-loggedIn') === 'true');
-  console.log('loggedin: ', isLoggedIn);
+  console.log('App.jsx: localStorage.getItem("loggedIn")', localStorage.getItem('NotFlix-loggedIn'));
+  // key exists in localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('NotFlix-loggedIn') === 'true');
 
   return (
     // HashRouter is used for github pages

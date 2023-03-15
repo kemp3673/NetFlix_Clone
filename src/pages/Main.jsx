@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Cookies from "js-cookie";
 import Header from "../components/Header";
 import Background from "../components/Background";
 import Category from "../components/Category";

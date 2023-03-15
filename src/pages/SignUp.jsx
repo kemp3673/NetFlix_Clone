@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Cookies from "js-cookie";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utility/firebase-config.js";
 import { validateForm } from "../utility/validateForm.js";
@@ -49,7 +48,7 @@ const SignUp = () => {
         const { email, password } = formValues;
         await createUserWithEmailAndPassword(auth, email, password).then(
           (response) => {
-            Cookies.set("NotFlix-loggedIn", true, { expires: 7 });
+            localStorage.setItem('NotFlix-loggedIn', 'true');
             setValidated(true);
           }
         );
