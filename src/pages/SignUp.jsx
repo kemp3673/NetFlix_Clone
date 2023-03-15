@@ -137,7 +137,6 @@ export default SignUp;
 
 const Container = styled.div`
   height: 100vh;
-  /* top: 70px; */
   width: 100vw;
   position: relative;
   .content {
