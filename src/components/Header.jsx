@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 import { FaArrowLeft } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
 import { useNavigate, Navigate } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
@@ -10,9 +12,11 @@ const Header = ({ login, user, player }) => {
   const [clicked, setClicked] = useState(false);
   const [returnHome, setReturnHome] = useState(false);
   const navigate = useNavigate();
-  const handleProfileImgClick = () => {
+
+  const logOut = () => {
+    Cookies.remove("NotFlix-loggedIn");
     navigate("/signup");
-  };
+  }
 
 
   return (
@@ -31,12 +35,8 @@ const Header = ({ login, user, player }) => {
           {login && <button onClick={() => setClicked(true)}>Log In</button>}
         </div>
         {user && (
-          <div className="profileImg">
-            <img
-              src={ProfileImg}
-              alt="User"
-              onClick={(e) => handleProfileImgClick()}
-            />
+          <div className="logout">
+            <BiLogOut className="logoutIcon" onClick={(e) => logOut()} />
           </div>
         )}
       </Wrapper>
@@ -97,27 +97,30 @@ const Container = styled.div`
       }
     }
   }
-  .profileImg {
+  .logout {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 1.5rem;
-    img {
-      width: 110%;
-      height: 110%;
-      translate: -3px;
-      object-fit: cover;
-    }
-    &:hover {
+    .logoutIcon {
+      width: 40px;
+      height: 40px;
+      color: #828282;
       cursor: pointer;
-      width: 45px;
-      height: 45px;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        color: #414141;
+      }
     }
     @media (max-width: 768px) {
       width: 25px;
       height: 25px;
+      .logoutIcon {
+      width: 20px;
+      height: 20px;
       }
+    }
   }
 `;
 

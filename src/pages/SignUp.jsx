@@ -1,9 +1,18 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utility/firebase-config.js";
+import { validateForm } from "../utility/validateForm.js";
 import Background from "../components/Background";
 import Header from "../components/Header";
 
 import styled from "styled-components";
 import { Navigate } from "react-router-dom";
+
+// Temp default test user for testing
+// const defaultUser = {
+//   email: "test@test.com",
+//   password: "123abc!",
 
 const SignUp = () => {
   const [formValues, setFormValues] = useState({
@@ -11,12 +20,47 @@ const SignUp = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
   const [validated, setValidated] = useState(false);
 
-  const handleLogin = (event) => {
+  const errorHandling = (message) => {
+    switch (message) {
+      case "email-already-in-use":
+        setError("Email already in use");
+        break;
+      case "invalid-email":
+        setError("Invalid email");
+        break;
+      case "weak-password":
+        setError("Password must be at least 6 characters");
+        break;
+      default: setError(message);
+    }
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+  };
+
+  const handleSignUp = async (event) => {
     event.preventDefault();
-    if (formValues.email && formValues.password) {
-      setValidated(true);
+    const formValidated = validateForm(formValues.email, formValues.password);
+    if (formValidated === true) {
+      try {
+        const { email, password } = formValues;
+        await createUserWithEmailAndPassword(auth, email, password).then(
+          (response) => {
+            Cookies.set("NotFlix-loggedIn", true, { expires: 7 });
+            setValidated(true);
+          }
+        );
+      } catch (error) {
+        const message = error.message.split("/")[1].split(")")[0].trim();
+        errorHandling(message);
+        console.error("Error in account creation: ", message);
+      }
+    } else {
+      errorHandling(formValidated);
+      console.error("Error in account creation: ", formValidated);
     }
   };
 
@@ -35,10 +79,14 @@ const SignUp = () => {
           <div className="text flex column">
             <h1>Unlimited movies, TV shows, and more.</h1>
             <h4>Or at least we used to.</h4>
-            <h6>
-              Don't have an account? Enter your email to create or restart your
-              membership.{" "}
-            </h6>
+            {!error ? (
+              <h6>
+                Don't have an account? Enter your email to create or restart
+                your membership.
+              </h6>
+            ) : (
+              <h6 style={{ color: "red" }}>{error}</h6>
+            )}
           </div>
           <div className="form">
             <form>
@@ -71,7 +119,7 @@ const SignUp = () => {
                 />
               )}
               {showPassword ? (
-                <Button onClick={(e) => handleLogin(e)}>Create Account</Button>
+                <Button onClick={(e) => handleSignUp(e)}>Create Account</Button>
               ) : (
                 <Button onClick={(e) => handleShowPassword(e)}>
                   Get Started
@@ -182,7 +230,7 @@ const Button = styled.button`
     background-color: #8f0007;
   }
   @media (max-width: 768px) {
-        font-size: 1rem;
-        padding: 0.2rem .5rem;
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
   }
 `;

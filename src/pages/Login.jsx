@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utility/firebase-config.js";
 import Background from "../components/Background";
 import Header from "../components/Header";
 
 import styled from "styled-components";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formValues, setFormValues] = useState({
@@ -12,11 +15,38 @@ const Login = () => {
   });
   const [validated, setValidated] = useState(false);
   const [signUp, setSignUp] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleLogin = (event) => {
+  const navigate = useNavigate();
+
+  const errorHandling = (message) => {
+    switch (message) {
+      case "invalid-email":
+        setError("Invalid email");
+        break;
+      case "user-not-found":
+        setError("User not found");
+        break;
+      case "wrong-password":
+        setError("Wrong password");
+        break;
+      default: setError(message);
+    }
+  };
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    if (formValues.email && formValues.password) {
-      setValidated(true);
+    try {
+      await signInWithEmailAndPassword(auth, formValues.email, formValues.password).then(
+        (response) => {
+          Cookies.set("NotFlix-loggedIn", true, { expires: 7 });
+          setValidated(true);
+        }
+      );
+    } catch (error) {
+      const message = error.message.split("/")[1].split(")")[0].trim();
+      console.error("Error in Login: ", message);
+      errorHandling(message);
     }
   };
 
@@ -53,11 +83,10 @@ const Login = () => {
                   })
                 }
               />
-              <div className="remember">
-                <input type="checkbox" id="remember" name="remember" />
-                <label htmlFor="remember">Remember me</label>
+              <div className="resetPassword">
+                <p onClick={() => navigate("/password-reset")}>Reset Password?</p>
               </div>
-
+              {error && <Error className="error">{error}</Error>}
               <Button onClick={(e) => handleLogin(e)}>Sign In</Button>
             </form>
           </div>
@@ -188,11 +217,18 @@ const Container = styled.div`
       }
     }
   }
-  .remember {
-    display: grid;
-    grid-template-columns: 1fr 8fr;
+  .resetPassword {
     width: 80%;
     margin-bottom: 1rem;
+    color: #737373;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
   }
 `;
 
@@ -229,4 +265,14 @@ const SignInLink = styled.button`
   @media (max-width: 768px) {
         font-size: 1rem;
       }
+`;
+
+const Error = styled.p`
+  color: red;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.25;
+  @media (max-width: 768px) {
+    font-size: 0.5rem;
+  }
 `;
