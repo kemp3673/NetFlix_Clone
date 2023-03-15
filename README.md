@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/102747919/225429659-285576fc-ff1d-4a11-a95f-fcf9f4a8de88.png" alt="Logo"/>
  </div>
  
-# NotFlix: A Netflix Clone to practice user authentication and UI creation
+# NotFlix: A Netflix Clone to practice user authentication and UI development
 
 <div align="center">
 <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React.js"/>
