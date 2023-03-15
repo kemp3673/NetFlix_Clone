@@ -8,7 +8,6 @@ import Player from "./pages/Player";
 import PasswordReset from "./pages/PasswordReset";
 
 const App = () => {
-  console.log('App.jsx: localStorage.getItem("loggedIn")', localStorage.getItem('NotFlix-loggedIn'));
   // key exists in localStorage
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('NotFlix-loggedIn') === 'true');
 
@@ -17,11 +16,11 @@ const App = () => {
     // Otherwise, use BrowserRouter
       <HashRouter>
         <Routes>
-          <Route exact path="/" element={isLoggedIn ? <Main /> : <Navigate to="/signup" />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={isLoggedIn ? <Main setIsLoggedIn={setIsLoggedIn}/> : <Navigate to="/signup" setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route exact path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route exact path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
           <Route exact path="/player/:id" element={<Player />} />
-          <Route exact path="/password-reset" element={<PasswordReset />} />
+          <Route exact path="/password-reset" element={<PasswordReset setIsLoggedIn={setIsLoggedIn}/>} />
         </Routes>
       </HashRouter>
   );

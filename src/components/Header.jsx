@@ -7,13 +7,14 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 import Logo from "../assets/Logo.png";
 
-const Header = ({ login, user, player }) => {
+const Header = ({ login, user, player, setIsLoggedIn }) => {
   const [clicked, setClicked] = useState(false);
   const [returnHome, setReturnHome] = useState(false);
   const navigate = useNavigate();
 
   const logOut = () => {
-    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('NotFlix-loggedIn');
+    setIsLoggedIn(false);
     navigate("/signup");
   }
 

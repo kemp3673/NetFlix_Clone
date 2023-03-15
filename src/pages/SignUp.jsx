@@ -13,7 +13,7 @@ import { Navigate } from "react-router-dom";
 //   email: "test@test.com",
 //   password: "123abc!",
 
-const SignUp = () => {
+const SignUp = ({setIsLoggedIn}) => {
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -49,6 +49,7 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(auth, email, password).then(
           (response) => {
             localStorage.setItem('NotFlix-loggedIn', 'true');
+            setIsLoggedIn(true);
             setValidated(true);
           }
         );

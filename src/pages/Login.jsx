@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -39,6 +39,7 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, formValues.email, formValues.password).then(
         (response) => {
           localStorage.setItem('NotFlix-loggedIn', 'true');
+          setIsLoggedIn(true);
           setValidated(true);
         }
       );

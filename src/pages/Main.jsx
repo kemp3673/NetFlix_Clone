@@ -7,7 +7,7 @@ import { freeMovies } from "../assets/freeMovies";
 import styled from "styled-components";
 
 
-const Main = () => {
+const Main = ({setIsLoggedIn}) => {
   const [popular, setPopular] = React.useState(null);
   const [trending, setTrending] = React.useState(null);
   const [horror, setHorror] = React.useState(null);
@@ -73,7 +73,7 @@ const Main = () => {
   return (
     <Container>
       <Background />
-      <Header login={false} user={true}/>
+      <Header login={false} user={true} setIsLoggedIn={setIsLoggedIn}/>
       <Wrapper className="body flex column a-center j-center">
       <Category title="Free Movies" movies={freeMovies} />
       {trending && <Category title="Trending Trailers" movies={trending} />}

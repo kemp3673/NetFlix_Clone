@@ -5,7 +5,6 @@ import Header from "../components/Header";
 
 const Player = ({urlID}) => {
   let videoCode = window.location.href.split("=")[1];
-  videoCode = videoCode || 'dpzEimY-TeI';
   return (
     <Container>
       <Header player={true}/>
